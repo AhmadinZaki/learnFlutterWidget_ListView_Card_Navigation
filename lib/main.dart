@@ -36,7 +36,17 @@ class _MyAppState extends State<MyApp> {
           title: const Text("Coba Widget"),
         ),
         body: Container(
-          child: ListView.builder(
+          child: ListView.separated(
+            separatorBuilder: (context, Position) {
+              if (Position % 3 == 0) {
+                return Container(
+                  color: Colors.green,
+                  child: const Text("Ini Separator"),
+                );
+              } else {
+                return const Divider();
+              }
+            },
             itemCount: bulan.length,
             itemBuilder: (context, index) {
               return Container(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nav_card_list/models/model_anime.dart';
+import 'package:nav_card_list/pages/page_anime.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,20 @@ class _MyAppState extends State<MyApp> {
           child: ListView.builder(
             itemCount: AnimeModel.isiAnime.length,
             itemBuilder: (BuildContext context, int index) {
-              return animeCard(AnimeModel.isiAnime[index]);
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PageAnime(
+                            pageAnimeModel: AnimeModel.isiAnime[index]);
+                      },
+                    ),
+                  );
+                },
+                child: animeCard(AnimeModel.isiAnime[index]),
+              );
             },
           ),
         ),
@@ -39,12 +53,12 @@ class _MyAppState extends State<MyApp> {
       child: Column(
         children: [
           Image.network(animeModel.GambarURL),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
             animeModel.namaAnime,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],
       ),
